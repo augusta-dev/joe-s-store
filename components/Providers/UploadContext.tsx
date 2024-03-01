@@ -3,7 +3,7 @@ import { SizeObj, ColourObj, CategoriesObj, DetailsObj, ImagesObj } from "./Subm
 import { colors, sizes, categories } from "./InitialValues";
 
 export type UploadCtxObj = {
-	images: string[];
+	images: string[] | ImagesObj;
 	productName: string;
 	brandName: string;
 	colorOptions: ColourObj;
@@ -12,7 +12,7 @@ export type UploadCtxObj = {
 	initialPrice: number;
 	finalPrice: number;
 	setDetails: (details: DetailsObj) => void;
-	setImages: (images: ImagesObj) => void;
+	setImages: (images: ImagesObj | string[]) => void;
 	setColourOption: (option: [string, boolean]) => void;
 	setSizeOption: (option: [string|number, boolean]) => void;
 	setCategories: (categories: [string, boolean]) => void;
@@ -28,7 +28,7 @@ const UploadContext = React.createContext<UploadCtxObj>({
 	initialPrice: 0,
 	finalPrice: 0,
 	setDetails: (details: DetailsObj) => {},
-	setImages: (images: ImagesObj) => {},
+	setImages: (images: ImagesObj | string[]) => {},
 	setColourOption: (option: [string, boolean]) => {},
 	setSizeOption: (option: [string|number, boolean]) => {},
 	setCategories: (categories: [string, boolean]) => {},

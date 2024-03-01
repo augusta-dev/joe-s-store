@@ -1,3 +1,4 @@
+'use client'
 // Import necessary types and modules
 import React, { useReducer, ReactNode, Dispatch } from "react";
 import UploadContext, {UploadCtxObj} from "./UploadContext";
@@ -6,7 +7,7 @@ import {  DetailsObj, ColourObj, SizeObj, CategoriesObj, ImagesObj } from "./Sub
 // Define the action types
 type UploadAction =
   | { type: "DETAIL"; detail: DetailsObj }
-  | { type: "IMAGES"; images: ImagesObj }
+  | { type: "IMAGES"; images: ImagesObj | string[] }
   | { type: "CLEAR" }
   | { type: "COLOUR"; colour: [string, boolean] }
   | { type: "SIZE"; size: [string|number, boolean] }
@@ -82,7 +83,7 @@ const UploadProvider = ({ children }: UploadProviderProps) => {
     dispatchUploadAction({ type: "DETAIL", detail: detail });
   };
 
-  const setImagesHandler = (images: ImagesObj) =>
+  const setImagesHandler = (images: ImagesObj | string[]) =>
     dispatchUploadAction({ type: "IMAGES", images: images });
 
   const setColourOptionsHandler = (colour: [string, boolean]) => {
