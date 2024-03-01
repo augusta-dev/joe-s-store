@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Header(props) {
+const Header:React.FC<{value: string | number}> = (props) => {
 	return (
 		<div className="w-full justify-center">
 			<h1 className="text-grey-D9 text-3xl font-source font-semibold pb-3 ">
@@ -9,3 +9,4 @@ export default function Header(props) {
 		</div>
 	);
 }
+export default Header
