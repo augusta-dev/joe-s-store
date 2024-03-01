@@ -1,0 +1,10 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+	-webkit-box-shadow: 0 0 0px 10000px #222222 inset;
+	outline: #222222;
+	border: none;
+	-webkit-border-image: none;
+	color: #676767;
+	-webkit-text-fill-color: #676767;
+}
