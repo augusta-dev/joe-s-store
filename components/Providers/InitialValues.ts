@@ -1,23 +1,25 @@
-export const colors = {
-    'black': false,
-    'white': false,
-    'gray': false,
-    'brown': false,
-    'red': false,
-    'orange': false,
-    'yellow': false,
-    'lime': false,
-    'green': false,
-    'emerald': false,
-    'teal': false,
-    'cyan': false,
-    'sky': false,
-    'blue': false,
-    'indigo': false,
-    'purple': false,
-    'fuchsia': false,
-    'pink': false,
-  };
+//import { ColourObj } from "./SubmissionTypes";
+
+// export const colors: ColourObj<boolean> = {
+//     'black': false,
+//     'white': false,
+//     'gray': false,
+//     'brown': false,
+//     'red': false,
+//     'orange': false,
+//     'yellow': false,
+//     'lime': false,
+//     'green': false,
+//     'emerald': false,
+//     'teal': false,
+//     'cyan': false,
+//     'sky': false,
+//     'blue': false,
+//     'indigo': false,
+//     'purple': false,
+//     'fuchsia': false,
+//     'pink': false,
+//   };
   
 export const sizes = {
 	33: false,

@@ -1,4 +1,4 @@
-export type ColourObj = {
+type ColorObj = {
 	black: boolean;
 	white: boolean;
 	gray: boolean;
@@ -19,6 +19,48 @@ export type ColourObj = {
 	pink: boolean;
 };
 
+export type colors =
+	| "black"
+	| "white"
+	| "gray"
+	| "brown"
+	| "red"
+	| "orange"
+	| "yellow"
+	| "lime"
+	| "green"
+	| "emerald"
+	| "teal"
+	| "cyan"
+	| "sky"
+	| "blue"
+	| "indigo"
+	| "purple"
+	| "fuchsia"
+	| "pink";
+export type ColourObj<T> = { [color in colors]: T };
+
+export const color:{[key in colors ]: boolean} = {
+	'black': false,
+    'white': false,
+    'gray': false,
+    'brown': false,
+    'red': false,
+    'orange': false,
+    'yellow': false,
+    'lime': false,
+    'green': false,
+    'emerald': false,
+    'teal': false,
+    'cyan': false,
+    'sky': false,
+    'blue': false,
+    'indigo': false,
+    'purple': false,
+    'fuchsia': false,
+    'pink': false,
+}
+console.log(color)
 export type SizeObj = {
 	33: boolean;
 	34: boolean;

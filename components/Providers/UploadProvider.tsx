@@ -2,23 +2,26 @@
 // Import necessary types and modules
 import React, { useReducer, ReactNode, Dispatch } from "react";
 import UploadContext, {UploadCtxObj} from "./UploadContext";
-import {  DetailsObj, ColourObj, SizeObj, CategoriesObj, ImagesObj } from "./SubmissionTypes";
+import {  DetailsObj, SizeObj, CategoriesObj, ImagesObj } from "./SubmissionTypes";
+import { colors } from "./SubmissionTypes";
 
 // Define the action types
 type UploadAction =
   | { type: "DETAIL"; detail: DetailsObj }
-  | { type: "IMAGES"; images: ImagesObj | string[] }
+  | { type: "UPLOAD"; images: ImagesObj }
+  | { type: "FULL"; images: string[]}
   | { type: "CLEAR" }
-  | { type: "COLOUR"; colour: [string, boolean] }
+  | { type: "COLOUR"; colour: string[] }
   | { type: "SIZE"; size: [string|number, boolean] }
   | { type: "CATEGORY"; category: [string, boolean] };
 
 // Define the state type
 type UploadState = {
-  images: string[];
+  uploadImages: ImagesObj;
+  fullImages: string[];
   productName: string;
   brandName: string;
-  colorOptions: ColourObj;
+  colorOptions: {[key in colors ]: boolean};
   sizeOptions: SizeObj;
   categories: CategoriesObj;
   initialPrice: number;
@@ -37,16 +40,23 @@ const uploadReducer = (state: UploadState, action: UploadAction): UploadState =>
       finalPrice: detail.fp,
     };
   }
-  if (action.type === "IMAGES") {
-    const currentImages = state.images === undefined ? [] : state.images;
+  if (action.type === "UPLOAD") {
+    const currentImages = state.uploadImages === undefined ? [] : state.uploadImages;
     const images = currentImages.concat(action.images);
-    return { ...state, images: images };
+    return { ...state, uploadImages: images };
+  }
+  if (action.type === "FULL") { 
+    const currentImages = state.fullImages === undefined ? [] : state.fullImages;
+    const images = currentImages.concat(action.images);
+    return { ...state,  fullImages: images };
   }
   if (action.type === "CLEAR") {
-    return { ...state, images: [] };
+    return { ...state, uploadImages: [] };
   }
   if (action.type === "COLOUR") {
-    const colours: ColourObj = state.colorOptions;
+    const colours: {[key in colors ]: boolean} = state.colorOptions;
+    console.log(state.colorOptions, colours);
+    
     colours[action.colour[0]] = action.colour[1];
     console.log(colours);
     return { ...state, colorOptions: colours };
@@ -83,10 +93,13 @@ const UploadProvider = ({ children }: UploadProviderProps) => {
     dispatchUploadAction({ type: "DETAIL", detail: detail });
   };
 
-  const setImagesHandler = (images: ImagesObj | string[]) =>
-    dispatchUploadAction({ type: "IMAGES", images: images });
+  const setUploadHandler = (images: ImagesObj) =>
+    dispatchUploadAction({ type: "UPLOAD", images: images });
 
-  const setColourOptionsHandler = (colour: [string, boolean]) => {
+  const setFullHandler = (images: string[]) =>
+    dispatchUploadAction({ type: "FULL", images: images });
+
+  const setColourOptionsHandler = (colour: string[]) => {
     dispatchUploadAction({ type: "COLOUR", colour: colour });
   };
 
@@ -102,8 +115,10 @@ const UploadProvider = ({ children }: UploadProviderProps) => {
     dispatchUploadAction({ type: "CLEAR" });
   };
 
+
   const uploadContext: UploadCtxObj = {
-    images: uploadState.images,
+    fullImages: uploadState.fullImages,
+    uploadImages: uploadState.uploadImages,
     productName: uploadState.productName,
     brandName: uploadState.brandName,
     colorOptions: uploadState.colorOptions,
@@ -112,7 +127,8 @@ const UploadProvider = ({ children }: UploadProviderProps) => {
     initialPrice: uploadState.initialPrice,
     finalPrice: uploadState.finalPrice,
     setDetails: setDetailHandler,
-    setImages: setImagesHandler,
+    setFullImages: setFullHandler,
+	setUploadImages: setUploadHandler,
     setColourOption: setColourOptionsHandler,
     setSizeOption: setSizeOptionsHandler,
     setCategories: setCategoriesHandler,

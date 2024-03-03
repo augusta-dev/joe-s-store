@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import UploadButton from "../UI/uploadthing"; 
+import UploadButton from "../UI/uploadthing.ts"; 
 import { useState, useEffect, useContext } from "react";
 import UploadContext from "../Providers/UploadContext";
 import { ImagesObj } from "../Providers/SubmissionTypes";
@@ -8,7 +8,7 @@ export default function Upload() {
 	const [totalImages, setTotalImages] = useState<ImagesObj>([]);
 	const uploadCtx = useContext(UploadContext);
 	useEffect(() => {
-		uploadCtx.setImages(totalImages);
+		uploadCtx.setUploadImages(totalImages);
 	}, [totalImages]);
 	const [errorMessage, setErrorMessage] = useState("")
 
