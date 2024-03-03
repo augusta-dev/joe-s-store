@@ -1,169 +1,134 @@
 "use client";
 // Import necessary types and modules
 import React, { useReducer, ReactNode, Dispatch } from "react";
-import UploadContext, { UploadCtxObj } from "./UploadContext";
-import {  sizes, categories } from "./InitialValues";
+import UploadContext from "./UploadContext";
+import { uploadInitialState } from "./InitialValues";
 import {
-  DetailsObj,
-  SizeObj,
-  CategoriesObj,
-  ImagesObj,
-  color,
+	sizesDef,
+	categoriesDef,
+	colorsDef,
+	imagesDef,
+	detailsDef,
 } from "./SubmissionTypes";
-import { colors } from "./SubmissionTypes";
-
-// Define the action types
-type UploadAction =
-  | { type: "DETAIL"; detail: DetailsObj }
-  | { type: "UPLOAD"; images: ImagesObj }
-  | { type: "FULL"; images: string[] }
-  | { type: "CLEAR" }
-  | { type: "COLOUR"; colour: [string, boolean] }
-  | { type: "SIZE"; size: [string | number, boolean] }
-  | { type: "CATEGORY"; category: [string, boolean] };
-
-// Define the state type
-type UploadState = {
-  uploadImages: ImagesObj;
-  fullImages: string[];
-  productName: string;
-  brandName: string;
-  colorOptions: { [key in colors]: boolean };
-  sizeOptions: SizeObj;
-  categories: CategoriesObj;
-  initialPrice: number;
-  finalPrice: number;
-};
+import { UploadCtxObj, UploadAction, UploadState } from "./uploadTypes";
 
 // Define the reducer function
 const uploadReducer = (
-  state: UploadState,
-  action: UploadAction
+	state: UploadState,
+	action: UploadAction,
 ): UploadState => {
-  console.log(state)
-  if (action.type === "DETAIL") {
-    const detail = action.detail;
-    return {
-      ...state,
-      productName: detail.pn,
-      brandName: detail.bn,
-      initialPrice: detail.ip,
-      finalPrice: detail.fp,
-    };
-  }
-  if (action.type === "UPLOAD") {
-    const currentImages =
-      state.uploadImages === undefined ? [] : state.uploadImages;
-    const images = currentImages.concat(action.images);
-    return { ...state, uploadImages: images };
-  }
-  if (action.type === "FULL") {
-    const currentImages =
-      state.fullImages === undefined ? [] : state.fullImages;
-    const images = currentImages.concat(action.images);
-    return { ...state, fullImages: images };
-  }
-  if (action.type === "CLEAR") {
-    return { ...state, uploadImages: [] };
-  }
-  if (action.type === "COLOUR") {
-    const colours = state.colorOptions;
-    console.log(state.colorOptions);
+	console.log(state);
+	if (action.type === "DETAIL") {
+		const detail = action.detail;
+		return {
+			...state,
+			productName: detail.pn,
+			brandName: detail.bn,
+			initialPrice: detail.ip,
+			finalPrice: detail.fp,
+		};
+	}
+	if (action.type === "UPLOAD") {
+		const currentImages =
+			state.uploadImages === undefined ? [] : state.uploadImages;
+		const images = currentImages.concat(action.images);
+		return { ...state, uploadImages: images };
+	}
+	if (action.type === "FULL") {
+		const currentImages =
+			state.fullImages === undefined ? [] : state.fullImages;
+		const images = currentImages.concat(action.images);
+		return { ...state, fullImages: images };
+	}
+	if (action.type === "CLEAR") {
+		return { ...state, uploadImages: [] };
+	}
+	if (action.type === "COLOUR") {
+		const colours = state.colorOptions;
+		console.log(state.colorOptions);
 
-    colours[action.colour[0] as colors] = Boolean(action.colour[1]);
-    console.log(action.colour);
-    return { ...state, colorOptions: colours };
-  }
-  if (action.type === "SIZE") {
-    const sizes = state.sizeOptions;
-    sizes[action.size[0] as keyof SizeObj] = action.size[1];
-    console.log(sizes);
-    return { ...state, sizeOptions: sizes };
-  }
-  if (action.type === "CATEGORY") {
-    const categories = state.categories;
-    categories[action.category[0] as keyof CategoriesObj] = action.category[1];
-    console.log(categories);
-    return { ...state, categories: categories };
-  }
+		colours[action.colour[0] as colorsDef] = Boolean(action.colour[1]);
+		console.log(action.colour);
+		return { ...state, colorOptions: colours };
+	}
+	if (action.type === "SIZE") {
+		const sizes = state.sizeOptions;
+		sizes[action.size[0] as sizesDef] = action.size[1];
+		console.log(sizes);
+		return { ...state, sizeOptions: sizes };
+	}
+	if (action.type === "CATEGORY") {
+		const categories = state.categories;
+		categories[action.category[0] as categoriesDef] = action.category[1];
+		console.log(categories);
+		return { ...state, categories: categories };
+	}
 
-  // Handle default case
-  return state;
+	return state;
 };
 
-// Define the context provider component
 type UploadProviderProps = {
-  children: ReactNode;
+	children: ReactNode;
 };
 
 const UploadProvider = ({ children }: UploadProviderProps) => {
-  //Always initialise the reducer. You have to eother initilise the variable or set it at runtime
-  const initialState = {
-    fullImages: [''],
-	uploadImages: [],
-	productName: "",
-	brandName: "",
-	colorOptions: color,
-	sizeOptions: sizes,
-	categories: categories,
-	initialPrice: 0,
-	finalPrice: 0,
-  }
-  const [uploadState, dispatchUploadAction]: [
-    UploadState,
-    Dispatch<UploadAction>
-  ] = useReducer(uploadReducer, initialState);
+	//Always initialise the reducer. You have to either initilise the variable or set it at runtime
 
-  const setDetailHandler = (detail: DetailsObj) => {
-    dispatchUploadAction({ type: "DETAIL", detail: detail });
-  };
+	const [uploadState, dispatchUploadAction]: [
+		UploadState,
+		Dispatch<UploadAction>,
+	] = useReducer(uploadReducer, uploadInitialState);
 
-  const setUploadHandler = (images: ImagesObj) =>
-    dispatchUploadAction({ type: "UPLOAD", images: images });
+	const setDetailHandler = (detail: detailsDef) => {
+		dispatchUploadAction({ type: "DETAIL", detail: detail });
+	};
 
-  const setFullHandler = (images: string[]) =>
-    dispatchUploadAction({ type: "FULL", images: images });
+	const setUploadHandler = (images: imagesDef) =>
+		dispatchUploadAction({ type: "UPLOAD", images: images });
 
-  const setColourOptionsHandler = (colour: [string, boolean]) => {
-    dispatchUploadAction({ type: "COLOUR", colour: colour });
-  };
+	const setFullHandler = (images: string[]) =>
+		dispatchUploadAction({ type: "FULL", images: images });
 
-  const setSizeOptionsHandler = (size: [string | number, boolean]) => {
-    dispatchUploadAction({ type: "SIZE", size: size });
-  };
+	const setColourOptionsHandler = (colour: [string, boolean]) => {
+		dispatchUploadAction({ type: "COLOUR", colour: colour });
+	};
 
-  const setCategoriesHandler = (category: [string, boolean]) => {
-    dispatchUploadAction({ type: "CATEGORY", category: category });
-  };
+	const setSizeOptionsHandler = (size: [string | number, boolean]) => {
+		dispatchUploadAction({ type: "SIZE", size: size });
+	};
 
-  const clearImagesHandler = () => {
-    dispatchUploadAction({ type: "CLEAR" });
-  };
+	const setCategoriesHandler = (category: [string, boolean]) => {
+		dispatchUploadAction({ type: "CATEGORY", category: category });
+	};
 
-  const uploadContext: UploadCtxObj = {
-    fullImages: uploadState.fullImages,
-    uploadImages: [uploadState.uploadImages],
-    productName: uploadState.productName,
-    brandName: uploadState.brandName,
-    colorOptions: uploadState.colorOptions,
-    sizeOptions: uploadState.sizeOptions,
-    categories: uploadState.categories,
-    initialPrice: uploadState.initialPrice,
-    finalPrice: uploadState.finalPrice,
-    setDetails: setDetailHandler,
-    setFullImages: setFullHandler,
-    setUploadImages: setUploadHandler,
-    setColourOption: setColourOptionsHandler,
-    setSizeOption: setSizeOptionsHandler,
-    setCategories: setCategoriesHandler,
-    clearImages: clearImagesHandler,
-  };
+	const clearImagesHandler = () => {
+		dispatchUploadAction({ type: "CLEAR" });
+	};
 
-  return (
-    <UploadContext.Provider value={uploadContext}>
-      {children}
-    </UploadContext.Provider>
-  );
+	const uploadContext: UploadCtxObj = {
+		fullImages: uploadState.fullImages,
+		uploadImages: [uploadState.uploadImages],
+		productName: uploadState.productName,
+		brandName: uploadState.brandName,
+		colorOptions: uploadState.colorOptions,
+		sizeOptions: uploadState.sizeOptions,
+		categories: uploadState.categories,
+		initialPrice: uploadState.initialPrice,
+		finalPrice: uploadState.finalPrice,
+		setDetails: setDetailHandler,
+		setFullImages: setFullHandler,
+		setUploadImages: setUploadHandler,
+		setColourOption: setColourOptionsHandler,
+		setSizeOption: setSizeOptionsHandler,
+		setCategories: setCategoriesHandler,
+		clearImages: clearImagesHandler,
+	};
+
+	return (
+		<UploadContext.Provider value={uploadContext}>
+			{children}
+		</UploadContext.Provider>
+	);
 };
 
 export default UploadProvider;

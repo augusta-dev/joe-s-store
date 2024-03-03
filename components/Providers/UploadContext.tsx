@@ -1,39 +1,21 @@
 import React from "react";
-import { SizeObj, CategoriesObj, DetailsObj, ImagesObj } from "./SubmissionTypes";
-import {  sizes, categories } from "./InitialValues";
-import { colors, color } from "./SubmissionTypes";
+import { categoriesDef, detailsDef, imagesDef, colorsDef, sizesDef   } from "./SubmissionTypes";
+import {  sizesInit, categoriesInit, colorsInit } from "./InitialValues";
+import { UploadCtxObj } from "./uploadTypes";
 
-export type UploadCtxObj = {
-	fullImages: string[];
-	uploadImages: ImagesObj[];
-	productName: string;
-	brandName: string;
-	colorOptions: {[key in colors ]: boolean};
-	sizeOptions: SizeObj;
-	categories: CategoriesObj;
-	initialPrice: number;
-	finalPrice: number;
-	setDetails: (details: DetailsObj) => void;
-	setFullImages: (images: string[]) => void;
-	setUploadImages:(images: ImagesObj ) => void;
-	setColourOption: (option: [string, boolean]) => void;
-	setSizeOption: (option: [string|number, boolean]) => void;
-	setCategories: (categories: [string, boolean]) => void;
-	clearImages: () => void;
-};
 const UploadContext = React.createContext<UploadCtxObj>({
 	fullImages: [''],
 	uploadImages: [],
 	productName: "",
 	brandName: "",
-	colorOptions: color,
-	sizeOptions: sizes,
-	categories: categories,
+	colorOptions: colorsInit,
+	sizeOptions: sizesInit,
+	categories: categoriesInit,
 	initialPrice: 0,
 	finalPrice: 0,
-	setDetails: (details: DetailsObj) => {},
+	setDetails: (details: detailsDef) => {},
 	setFullImages: (images: string[]) => {},
-	setUploadImages:(images: ImagesObj ) => {},
+	setUploadImages:(images: imagesDef ) => {},
 	setColourOption: (option: [string, boolean]) => {},
 	setSizeOption: (option: [string|number, boolean]) => {},
 	setCategories: (categories: [string, boolean]) => {},
