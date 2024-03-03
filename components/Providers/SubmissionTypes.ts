@@ -38,7 +38,7 @@ export type colors =
 	| "purple"
 	| "fuchsia"
 	| "pink";
-export type ColourObj<T> = { [color in colors]: T };
+//export type ColourObj<T> = { [color in colors]: T };
 
 export const color:{[key in colors ]: boolean} = {
 	'black': false,
