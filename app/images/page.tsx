@@ -5,10 +5,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Header from "../../components/UI/Header";
 import { useEffect } from "react";
-import {
-	ImagesObj,
-	RetrievedItemsObj,
-} from "../../components/Providers/SubmissionTypes";
+import { retrievedItemsDef } from "../../components/Providers/SubmissionTypes";
 
 export default function Storepage() {
 	const { data: session } = useSession();
@@ -18,7 +15,7 @@ export default function Storepage() {
 			let list = await fetch("/api/get-images");
 			const lists = await list.json();
 			const gottenImages: string[] = lists.reduce(
-				(acc: string[], item: RetrievedItemsObj) => {
+				(acc: string[], item: retrievedItemsDef) => {
 					const imageUrls = item.images.map((imag) => imag.url);
 					return acc.concat(imageUrls);
 				},
