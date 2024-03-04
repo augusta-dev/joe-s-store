@@ -18,6 +18,7 @@ const config: Config = {
 					C3: "#C3C3C3",
 					FE: "#FEFEFE",
 					E1: "#1E1E1E",
+					DA: '#DAD9D9'
 				},
 				blue: {
 					6: "#0000ff",
@@ -32,9 +33,9 @@ const config: Config = {
 				36: "100%",
 			},
 			fontFamily: {
-				signika: "var(--font-signika-negative)",
+				signika: "var(--font-signika)",
 				athiti: "var(--font-athiti)",
-				source: "var(--font-source-sans-pro)",
+				source: "var(--font-source)",
 			},
 			height: {
 				max: "max(100vh, 100%)",

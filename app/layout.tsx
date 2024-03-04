@@ -26,7 +26,7 @@ const signika = Signika_Negative({
 const source = Source_Sans_3({
 	subsets: ["latin"],
 	weight: ["200", "300", "400", "500", "600", "700"],
-	variable: "--font-signika",
+	variable: "--font-source",
 });
 
 export default function RootLayout({
