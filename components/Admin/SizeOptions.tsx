@@ -3,13 +3,6 @@ import "./colour-options.css";
 import SizeInput from "./SizeInput";
 
 export default function ColourOptions() {
-	// const sizes = {
-	// 	values: ["4XL", "3XL", "2XL", "XL", "L", "M", "S", "XS", "XXS"],
-	// 	numbers: [
-	// 		33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
-	// 		50,
-	// 	],
-	// };
 	const sizes = [
 		33,
 		34,
@@ -47,7 +40,6 @@ export default function ColourOptions() {
 					key={value}
 				></SizeInput>
 			))}
-			
 		</div>
 	);
 }

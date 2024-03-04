@@ -8,7 +8,7 @@ import {
 
 export type UploadCtxObj = {
 	fullImages: string[];
-	uploadImages: imagesDef[];
+	uploadImages: imagesDef;
 	productName: string;
 	brandName: string;
 	colorOptions: { [key in colorsDef]: boolean };

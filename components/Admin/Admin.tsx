@@ -23,6 +23,7 @@ const AdminPage: React.FC = (props) => {
 	const [showCO, setShowCO] = useState<boolean>(false);
 	const [showSO, setShowSO] = useState<boolean>(false);
 	const [showCat, setShowCat] = useState<boolean>(false);
+	const [error, setError] = useState("");
 	const [details, setDetails] = useState({
 		pn: "",
 		bn: "",
@@ -36,9 +37,8 @@ const AdminPage: React.FC = (props) => {
 			if (typeof detail == "string") boolean.push(detail.length !== 0);
 		});
 		const allTrue = boolean.every((val) => val === true);
-		// console.log(images);
 		if (images !== undefined) {
-			images.length > 0 ? setIsFull(allTrue) : setIsFull(false);
+			images.length > 0 && setIsFull(allTrue);
 		}
 	}, [details, images, co, UploadCtx.sizeOptions]);
 
@@ -54,14 +54,13 @@ const AdminPage: React.FC = (props) => {
 	const submitHandler = (e: React.FormEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		if (images.length > 0 && co && isFull) {
-			console.log(images.length);
 			UploadCtx.setDetails(details);
-			console.log(UploadCtx)
-			//sendImages();
+			sendImages();
 			clearall();
+			setTimeout(() => {
+				setError("");
+			}, 3000);
 		}
-		console.log(details);
-		console.log(images);
 	};
 	const sendImages = async () => {
 		try {
@@ -81,10 +80,10 @@ const AdminPage: React.FC = (props) => {
 					"Content-Type": "application/json",
 				},
 			});
-			const data = await response.json();
-			console.log(data);
-		} catch (error) {
-			console.error(error);
+			const data: { message: string } = await response.json();
+			setError("Data uploaded!");
+		} catch (error: { message: string } | any | unknown) {
+			setError("Error uploading data!");
 		}
 	};
 
@@ -132,6 +131,7 @@ const AdminPage: React.FC = (props) => {
 						here
 					</Link>
 				</p>
+				{error && <p className="text-white my-2">{error}</p>}
 				<Input
 					placeholder="Product Name"
 					type="text"
@@ -190,7 +190,7 @@ const AdminPage: React.FC = (props) => {
 				<Input
 					placeholder="Initial Price in Naira"
 					type="number"
-					value={details.ip}
+					value={details.ip != 0 ? details.ip : ""}
 					onChange={(e) => {
 						setDetails({
 							...details,
@@ -201,7 +201,7 @@ const AdminPage: React.FC = (props) => {
 				<Input
 					placeholder="Final Price in Naira"
 					type="number"
-					value={details.fp}
+					value={details.fp != 0 ? details.fp : ""}
 					onChange={(e) => {
 						setDetails({
 							...details,

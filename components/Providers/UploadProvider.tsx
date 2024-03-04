@@ -15,7 +15,6 @@ const uploadReducer = (
 	state: UploadState,
 	action: UploadAction,
 ): UploadState => {
-	console.log(state);
 	if (action.type === "DETAIL") {
 		const detail = action.detail;
 		return {
@@ -45,15 +44,12 @@ const uploadReducer = (
 	}
 	if (action.type === "SIZE") {
 		const sizes = state.sizeOptions;
-    console.log(action.size)
 		sizes[action.size[0] as sizesDef] = Boolean(action.size[1]);
-		console.log(sizes);
 		return { ...state, sizeOptions: sizes };
 	}
 	if (action.type === "CATEGORY") {
 		const categories = state.categories;
 		categories[action.category[0] as categoriesDef] = action.category[1];
-		console.log(categories);
 		return { ...state, categories: categories };
 	}
 
@@ -99,7 +95,7 @@ const UploadProvider = ({ children }: UploadProviderProps) => {
 
 	const uploadContext: UploadCtxObj = {
 		fullImages: uploadState.fullImages,
-		uploadImages: [uploadState.uploadImages],
+		uploadImages: uploadState.uploadImages,
 		productName: uploadState.productName,
 		brandName: uploadState.brandName,
 		colorOptions: uploadState.colorOptions,
