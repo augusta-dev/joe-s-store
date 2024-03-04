@@ -16,7 +16,7 @@ import Header from "../UI/Header";
 
 const AdminPage: React.FC = (props) => {
 	const UploadCtx = useContext(UploadContext);
-	const images = UploadCtx.images;
+	const images = UploadCtx.uploadImages;
 	const co = UploadCtx.colorOptions;
 	const { data: session } = useSession();
 	const [isFull, setIsFull] = useState<boolean>(false);
@@ -33,14 +33,14 @@ const AdminPage: React.FC = (props) => {
 	useEffect(() => {
 		const boolean: boolean[] = [];
 		detailsArray.forEach((detail) => {
-			boolean.push(detail.length !== 0);
+			if (typeof detail == "string") boolean.push(detail.length !== 0);
 		});
 		const allTrue = boolean.every((val) => val === true);
-		console.log(images);
+		// console.log(images);
 		if (images !== undefined) {
 			images.length > 0 ? setIsFull(allTrue) : setIsFull(false);
 		}
-	}, [details, images, co]);
+	}, [details, images, co, UploadCtx.sizeOptions]);
 
 	const clearall = () => {
 		setDetails({ pn: "", bn: "", ip: 0, fp: 0 });
@@ -56,7 +56,8 @@ const AdminPage: React.FC = (props) => {
 		if (images.length > 0 && co && isFull) {
 			console.log(images.length);
 			UploadCtx.setDetails(details);
-			sendImages();
+			console.log(UploadCtx)
+			//sendImages();
 			clearall();
 		}
 		console.log(details);
@@ -147,7 +148,7 @@ const AdminPage: React.FC = (props) => {
 						setDetails({ ...details, bn: e.target.value });
 					}}
 				/>
-				`<button
+				<button
 					className="w-full h-12 mt-2 text-grey-67 bg-grey-22 text-left px-6 rounded-lg"
 					onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
 						e.preventDefault();
@@ -159,7 +160,7 @@ const AdminPage: React.FC = (props) => {
 				{showCO && <ColourOptions />}
 				<button
 					className="w-full h-12 mt-2 text-grey-67 bg-grey-22 text-left px-6 rounded-lg"
-					onClick={(e) => {
+					onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
 						e.preventDefault();
 						setShowSO(!showSO);
 					}}

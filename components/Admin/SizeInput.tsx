@@ -9,7 +9,7 @@ const SizeInput: React.FC<{ value: string | number; className?: string }> = (
 ) => {
 	const uploadCtx = useContext(UploadContext);
 
-	const [isClicked, setIsClicked] = useState(false);
+	const [isClicked, setIsClicked] = useState<boolean>(false);
 	useEffect(() => {
 		uploadCtx.setSizeOption([props.value, isClicked]);
 	}, [isClicked]);
@@ -17,13 +17,13 @@ const SizeInput: React.FC<{ value: string | number; className?: string }> = (
 	return (
 		<div className="w-fit rounded-lg p-2 bg-grey-22">
 			<button
-				onClick={(e) => {
+				onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
 					e.preventDefault();
 					setIsClicked(!isClicked);
 				}}
+				type="submit"
 				className={`${props.className} font-semibold font-athiti text-grey-67 text-2xl h-10 w-10 flex justify-center items-center rounded`}
 			>
-				{" "}
 				{props.value}
 				{isClicked && (
 					<Image

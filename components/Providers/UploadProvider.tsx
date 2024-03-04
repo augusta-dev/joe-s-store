@@ -1,5 +1,4 @@
 "use client";
-// Import necessary types and modules
 import React, { useReducer, ReactNode, Dispatch } from "react";
 import UploadContext from "./UploadContext";
 import { uploadInitialState } from "./InitialValues";
@@ -12,7 +11,6 @@ import {
 } from "./SubmissionTypes";
 import { UploadCtxObj, UploadAction, UploadState } from "./uploadTypes";
 
-// Define the reducer function
 const uploadReducer = (
 	state: UploadState,
 	action: UploadAction,
@@ -29,14 +27,11 @@ const uploadReducer = (
 		};
 	}
 	if (action.type === "UPLOAD") {
-		const currentImages =
-			state.uploadImages === undefined ? [] : state.uploadImages;
-		const images = currentImages.concat(action.images);
+		const images = state.uploadImages.concat(action.images);
 		return { ...state, uploadImages: images };
 	}
 	if (action.type === "FULL") {
-		const currentImages =
-			state.fullImages === undefined ? [] : state.fullImages;
+		const currentImages = state.fullImages;
 		const images = currentImages.concat(action.images);
 		return { ...state, fullImages: images };
 	}
@@ -45,15 +40,13 @@ const uploadReducer = (
 	}
 	if (action.type === "COLOUR") {
 		const colours = state.colorOptions;
-		console.log(state.colorOptions);
-
 		colours[action.colour[0] as colorsDef] = Boolean(action.colour[1]);
-		console.log(action.colour);
 		return { ...state, colorOptions: colours };
 	}
 	if (action.type === "SIZE") {
 		const sizes = state.sizeOptions;
-		sizes[action.size[0] as sizesDef] = action.size[1];
+    console.log(action.size)
+		sizes[action.size[0] as sizesDef] = Boolean(action.size[1]);
 		console.log(sizes);
 		return { ...state, sizeOptions: sizes };
 	}
@@ -73,7 +66,6 @@ type UploadProviderProps = {
 
 const UploadProvider = ({ children }: UploadProviderProps) => {
 	//Always initialise the reducer. You have to either initilise the variable or set it at runtime
-
 	const [uploadState, dispatchUploadAction]: [
 		UploadState,
 		Dispatch<UploadAction>,

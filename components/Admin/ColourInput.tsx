@@ -15,10 +15,11 @@ const ColourInput: React.FC<{ className: string; value: string }> = (props) => {
 	return (
 		<div className="w-fit rounded-lg p-2 bg-grey-22">
 			<button
-				onClick={(e) => {
+				onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
 					e.preventDefault();
 					setIsClicked(!isClicked);
 				}}
+				type="submit"
 				className={`${props.className} h-10 w-10 flex justify-center items-center rounded`}
 			>
 				{isClicked && (

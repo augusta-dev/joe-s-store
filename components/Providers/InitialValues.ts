@@ -43,12 +43,12 @@ export const sizesInit: { [key in sizesDef]: boolean } = {
 	"4XL": false,
 	"3XL": false,
 	"2XL": false,
-	XL: false,
-	L: false,
-	M: false,
-	S: false,
-	XS: false,
-	XXS: false,
+	'XL': false,
+	'L': false,
+	'M': false,
+	'S': false,
+	'XS': false,
+	'XXS': false,
 };
 export const categoriesInit: { [key in categoriesDef]: boolean } = {
 	Men: false,

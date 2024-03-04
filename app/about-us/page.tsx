@@ -1,4 +1,4 @@
-const About = (props) => {
+const About = () => {
 	return (
 		<div className="text-grey-D9 py-6 px-4 font-signika text-sm text-justify">
 			<h1 className="text-3xl text-center font-source">About Us</h1>
