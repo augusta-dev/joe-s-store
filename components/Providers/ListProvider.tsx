@@ -6,6 +6,7 @@ import { categoriesInit, colorsInit, sizesInit } from "./InitialValues";
 const ListProvider: React.FC<{ children: ReactNode }> = (props) => {
 	const [list, setList] = useState<list>(listInit);
 	const setListHandler = (data: list) => {
+		console.log(data)
 		setList(data);
 	};
 	const listContext = {

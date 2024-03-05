@@ -4,6 +4,7 @@ import Images from "../../../components/models/uploadImages";
 
 export async function GET() {
 	try {
+		console.log('called')
 		await connectMongo();
 		const list = await Images.find();
 		return new NextResponse(JSON.stringify(list), { status: 200 });

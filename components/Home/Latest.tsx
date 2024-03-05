@@ -1,25 +1,35 @@
 "use client";
 // import "tailwindcss/tailwind.css";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Images from "../models/uploadImages";
 import { imagesDef } from "../Providers/SubmissionTypes";
 import Image from "next/image";
 import Sale from "./Sale";
-import ListContext from "../Providers/ListContext";
+import ListContext, { list } from "../Providers/ListContext";
 
-export default function Latest() {
-	const [url, setUrl] = useState("");
-    const listCtx = useContext(ListContext)
-
-	const getImages = async () => {
-		const list = await fetch("/api/get-images");
-		const data = await list.json();
-        console.log(data);
-        listCtx.setList(data);
-		let array: imagesDef = data[data.length - 1].images;
-		setUrl(array[array.length - 1].url);
+export async function getStaticProps() {
+	const data = await fetch("/api/get-images");
+	const list:list = await data.json();
+	console.log(list)
+	return {
+		props: {
+			list,
+		},
 	};
-	getImages();
+}
+
+export default function Latest(list:list) {
+	console.log(list)
+	const listCtx = useContext(ListContext);
+	listCtx.setList(list);
+
+	const [url, setUrl] = useState("");
+
+	useEffect(()=>{
+		let array: imagesDef = list[list.length-1] && list[list.length - 1].images;
+		array && setUrl(array[array.length - 1].url);
+	}, [list])
+
 	return (
 		<>
 			<div className="w-full bg-grey-22 rounded-lg h-fit flex flex-row px-3 my-4 py-3">
@@ -49,3 +59,4 @@ export default function Latest() {
 		</>
 	);
 }
+
