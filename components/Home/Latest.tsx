@@ -5,31 +5,23 @@ import Images from "../models/uploadImages";
 import { imagesDef } from "../Providers/SubmissionTypes";
 import Image from "next/image";
 import Sale from "./Sale";
-import ListContext, { list } from "../Providers/ListContext";
+import ListContext from "../Providers/ListContext";
 
-export async function getStaticProps() {
-	const data = await fetch("/api/get-images");
-	const list:list = await data.json();
-	console.log(list)
-	return {
-		props: {
-			list,
-		},
-	};
-}
-
-export default function Latest(list:list) {
-	console.log(list)
-	const listCtx = useContext(ListContext);
-	listCtx.setList(list);
-
+export default function Latest() {
 	const [url, setUrl] = useState("");
+    const listCtx = useContext(ListContext)
+
+	const getImages = async () => {
+		const list = await fetch("/api/get-images");
+		const data = await list.json();
+        listCtx.setList(data);
+		let array: imagesDef = data[data.length - 1].images;
+		setUrl(array[array.length - 1].url);
+	};
 
 	useEffect(()=>{
-		let array: imagesDef = list[list.length-1] && list[list.length - 1].images;
-		array && setUrl(array[array.length - 1].url);
-	}, [list])
-
+		getImages()
+	}, [])
 	return (
 		<>
 			<div className="w-full bg-grey-22 rounded-lg h-fit flex flex-row px-3 my-4 py-3">
@@ -59,4 +51,3 @@ export default function Latest(list:list) {
 		</>
 	);
 }
-
