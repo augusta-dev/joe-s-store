@@ -16,7 +16,7 @@ const MenuBar = () => {
 	return (
 		<div className="flex flex-row flex-wrap w-full pt-5 items-center align-middle justify-between">
 			{showMenu && (
-				<div className="-ml-5 mt-4 fixed h-24 w-24 bg-red-500">
+				<div>
 					<button onClick={() => setShow(!showMenu)}>
 						{" "}
 						<ModalMenu></ModalMenu>

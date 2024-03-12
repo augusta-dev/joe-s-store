@@ -9,35 +9,47 @@
 //The menu will have a height of 100vh
 //write now
 import Image from "next/image";
-import cross from "../../assets/cross.svg";
+import Link from "next/link";
+import cross from "../../assets/cross2.svg";
 
 const ModalMenu = () => {
 	return (
 		<div>
-			<div className=" fixed top-0 left-0 w-80 !h-screen !z-50 bg-grey-22 shadow-lg p-4">
-				<Image src={cross}></Image>
+			<div className=" fixed top-0 left-0 w-80 !h-screen !z-50 bg-grey-22 shadow-lg p-4 text-left">
+				<Image
+					src={cross}
+					alt=""
+                    className="float-right mt-1"
+				/>
+				<p className="italic mb-4">
+					The links on this page have been placed abstractly as the
+					app is currently under development. These links have been
+					incorporated for easy access to the relevant pages. It is
+					important to note that this is not the final design of the
+					menu and I am working towards enhancing it for a superior
+					user experience.
+				</p>
+				<Link
+					href="/admin"
+					className="underline"
+				>
+					Admin Page
+				</Link>
+				<p className="italic">For uploading items (pieces of clothing along with their detail) to MongoDB</p>
+				<Link href="/signin" className="underline">Signin</Link>
+				<p></p>
+				<Link
+					href="/signup"
+					className="underline"
+				>
+					Signup
+				</Link>
+				<br />
+				<hr className="h-1 border-1 mt-2" />
+				<p>My Account</p>
+				<p>All Product</p>
 				<ul>
-					<li>One</li>
-                    <li>One</li>
-                    <li>One</li>
-                    <li>One</li>
-                    <li>One</li>
-                    <li>One</li>
-                    <li>One</li>
-                    <li>One</li>
-                    <li>One</li>
-                    <li>One</li>
-                    <li>One</li>
-                    <li>One</li>
-                    <li>One</li>
-                    <li>One</li>
-                    <li>One</li>
-                    <li>One</li>
-                    <li>One</li>
-                    <li>One</li>
-                    <li>One</li>
-                    <li>One</li>
-                    <li>One</li>
+					<li>Categories</li>
 				</ul>
 			</div>
 		</div>

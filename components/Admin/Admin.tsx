@@ -92,139 +92,139 @@ const AdminPage: React.FC = (props) => {
 		signOut();
 	};
 
-	if (
-		session &&
-		session.user &&
-		session.user.email === "augustan506@gmail.com"
-	) {
-		return (
-			<form className="flex items-center justify-center py-6 px-4  flex-col">
-				<div className="flex w-36 justify-center items-center align-middle text-center">
-					<Header value="Enter Data" />
-					<button
-						type="submit"
-						onClick={(e) => {
-							signout(e);
-						}}
-						className="w-fit absolute mb-2 ml-[calc(85%-20px)]"
-					>
-						{" "}
-						<Image
-							src={cross}
-							className="w-5 h-5"
-							alt="cross"
-						></Image>
-					</button>
-				</div>
-				<Image
-					src={avatar}
-					className="self-center h-20 w-20 my-1"
-					alt="avatar"
-				></Image>
-				<Upload />
-				<p className="-mt-1 italic font-athiti">
-					To avoid repetition, you can view all images{" "}
-					<Link
-						href="/images"
-						className="hover:underline"
-					>
-						here
-					</Link>
-				</p>
-				{error && <p className="text-white my-2">{error}</p>}
-				<Input
-					placeholder="Product Name"
-					type="text"
-					value={details.pn}
-					onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-						setDetails({ ...details, pn: e.target.value });
-					}}
-				/>
-				<Input
-					placeholder="Brand Name"
-					type="text"
-					value={details.bn}
-					onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-						setDetails({ ...details, bn: e.target.value });
-					}}
-				/>
+	// if (
+	// 	session &&
+	// 	session.user &&
+	// 	session.user.email === "augustan506@gmail.com"
+	// ) {
+	return (
+		<form className="flex items-center justify-center py-6  flex-col">
+			<div className="flex w-36 justify-center items-center align-middle text-center">
+				<Header value="Enter Data" />
 				<button
-					className="w-full h-12 mt-2 text-grey-67 bg-grey-22 text-left px-6 rounded-lg"
-					onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-						e.preventDefault();
-						setShowCO(!showCO);
-					}}
-				>
-					Colour Options
-				</button>
-				{showCO && <ColourOptions />}
-				<button
-					className="w-full h-12 mt-2 text-grey-67 bg-grey-22 text-left px-6 rounded-lg"
-					onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-						e.preventDefault();
-						setShowSO(!showSO);
-					}}
-				>
-					Size Options
-				</button>
-				{showSO && <SizeOptions />}
-				<button
-					className="w-full h-12 mt-2 text-grey-67 bg-grey-22 text-left px-6 rounded-lg"
-					onClick={(e) => {
-						e.preventDefault();
-						setShowCat(!showCat);
-					}}
-				>
-					Categories
-				</button>
-
-				{showCat && (
-					<>
-						<p className="text-left font-athithi font-thin text-base text-grey-67 italic mt-1 w-full">
-							Please select all applicable categories!
-						</p>{" "}
-						<Categories />
-					</>
-				)}
-
-				<Input
-					placeholder="Initial Price in Naira"
-					type="number"
-					value={details.ip != 0 ? details.ip : ""}
-					onChange={(e) => {
-						setDetails({
-							...details,
-							ip: parseInt(e.target.value),
-						});
-					}}
-				/>
-				<Input
-					placeholder="Final Price in Naira"
-					type="number"
-					value={details.fp != 0 ? details.fp : ""}
-					onChange={(e) => {
-						setDetails({
-							...details,
-							fp: parseInt(e.target.value),
-						});
-					}}
-				/>
-
-				<button
-					onClick={(e) => {
-						submitHandler(e);
-					}}
 					type="submit"
-					className={`${
-						isFull ? "bg-grey-D9" : "bg-grey-67"
-					} h-12 w-full rounded-lg mt-16 text-grey-12 text-2xl font-medium`}
+					onClick={(e) => {
+						signout(e);
+					}}
+					className="w-fit absolute mb-2 ml-[calc(85%-20px)]"
 				>
-					Save
+					{" "}
+					<Image
+						src={cross}
+						className="w-5 h-5"
+						alt="cross"
+					></Image>
 				</button>
-			</form>
-		);
-	} else {
-		return <AccessDenied />;
-	}
+			</div>
+			<Image
+				src={avatar}
+				className="self-center h-20 w-20 my-1"
+				alt="avatar"
+			></Image>
+			<Upload />
+			<p className="-mt-1 italic font-athiti">
+				To avoid repetition, you can view all images{" "}
+				<Link
+					href="/images"
+					className="hover:underline"
+				>
+					here
+				</Link>
+			</p>
+			{error && <p className="text-white my-2">{error}</p>}
+			<Input
+				placeholder="Product Name"
+				type="text"
+				value={details.pn}
+				onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+					setDetails({ ...details, pn: e.target.value });
+				}}
+			/>
+			<Input
+				placeholder="Brand Name"
+				type="text"
+				value={details.bn}
+				onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+					setDetails({ ...details, bn: e.target.value });
+				}}
+			/>
+			<button
+				className="w-full h-12 mt-2 text-grey-67 bg-grey-22 text-left px-6 rounded-lg"
+				onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+					e.preventDefault();
+					setShowCO(!showCO);
+				}}
+			>
+				Colour Options
+			</button>
+			{showCO && <ColourOptions />}
+			<button
+				className="w-full h-12 mt-2 text-grey-67 bg-grey-22 text-left px-6 rounded-lg"
+				onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+					e.preventDefault();
+					setShowSO(!showSO);
+				}}
+			>
+				Size Options
+			</button>
+			{showSO && <SizeOptions />}
+			<button
+				className="w-full h-12 mt-2 text-grey-67 bg-grey-22 text-left px-6 rounded-lg"
+				onClick={(e) => {
+					e.preventDefault();
+					setShowCat(!showCat);
+				}}
+			>
+				Categories
+			</button>
+
+			{showCat && (
+				<>
+					<p className="text-left font-athithi font-thin text-base text-grey-67 italic mt-1 w-full">
+						Please select all applicable categories!
+					</p>{" "}
+					<Categories />
+				</>
+			)}
+
+			<Input
+				placeholder="Initial Price in Naira"
+				type="number"
+				value={details.ip != 0 ? details.ip : ""}
+				onChange={(e) => {
+					setDetails({
+						...details,
+						ip: parseInt(e.target.value),
+					});
+				}}
+			/>
+			<Input
+				placeholder="Final Price in Naira"
+				type="number"
+				value={details.fp != 0 ? details.fp : ""}
+				onChange={(e) => {
+					setDetails({
+						...details,
+						fp: parseInt(e.target.value),
+					});
+				}}
+			/>
+
+			<button
+				onClick={(e) => {
+					submitHandler(e);
+				}}
+				type="submit"
+				className={`${
+					isFull ? "bg-grey-D9" : "bg-grey-67"
+				} h-12 w-full rounded-lg mt-16 text-grey-12 text-2xl font-medium`}
+			>
+				Save
+			</button>
+		</form>
+	);
+	// } else {
+	// 	return <AccessDenied />;
+	// }
 };
 export default AdminPage;

@@ -59,7 +59,7 @@ export default function Signin() {
 	}, [session]);
 
 	return (
-		<form className="flex flex-col h-full py-6 px-4 align-middle items-center">
+		<form className="flex flex-col h-full py-7 align-middle items-center">
 			<h1 className="w-full font-signika text-grey-67 font-semibold text-3xl text-center">
 				Sign In to Continue
 			</h1>
