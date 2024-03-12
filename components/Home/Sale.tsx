@@ -3,38 +3,38 @@ import React, { useContext, useEffect, useState } from "react";
 import ListContext from "../Providers/ListContext";
 import ProductDisplay from "../Products/ProductDisplay";
 import { imagesDef } from "../Providers/SubmissionTypes";
+import { list } from "../Providers/ListContext";
 export default function Sale() {
 	const listCtx = useContext(ListContext);
+	const [saleList, setSaleList] = useState<list>([]);
 
-	const [images, setImages] = useState<imagesDef>([]);
-	const [url, setUrl] = useState<string[]>([""]);
+	useEffect(() => {
+		let tempList: list = [];
+		for (let i = 1; i < 11; i++) {
+			tempList.push(listCtx.list[listCtx.list.length - i]);
+		}
+		setSaleList(tempList);
+	}, [listCtx.list]);
 
-	listCtx.list.forEach((el) => {
-		const images = el.images;
+	console.log(saleList)
 
-		console.log(images);
-		setImages([...images, ...el.images]);
-	});
-
-	// useEffect(() => {
-	// 	images.forEach((image) => {});
-	// });
-
-	// const url = images.reduce((acc,ini) => {
-	// 	acc.concat(ini.images)
-	// 	return acc
-	// })
-	// 8\
 	return (
-		<div>
+		<div className="mb-5 z-20">
 			<h1 className="text-grey-DA font-signika text-lg">Sale</h1>
-			<ProductDisplay
-				image=""
-				initialprice={3}
-				finalPrice={1}
-				productName=""
-				brandName=""
-			></ProductDisplay>
+			<div className=" grid w-full grid-cols-2 gap-2 z-20">
+			{saleList.every(item => item !== undefined) &&
+				saleList.map((item) => (
+					<ProductDisplay
+						key={item._id}
+						image={item.images[0].url}
+						initialprice={item.initialPrice}
+						finalPrice={item.finalPrice}
+						productName={item.productName}
+						brandName={item.brandName}
+					></ProductDisplay>
+				))}
+			</div>
+			
 		</div>
 	);
 }

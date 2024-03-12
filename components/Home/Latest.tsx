@@ -24,13 +24,13 @@ export default function Latest() {
 	}, [])
 	return (
 		<>
-			<div className="w-full bg-grey-22 rounded-lg h-fit flex flex-row px-3 my-4 py-3">
+			<div className="w-full bg-grey-22 rounded-lg h-fit flex flex-row px-3 my-4 py-3 !z-20">
 				<section className="w-[73%] flex flex-col justify-between">
 					<div>
 						<h1 className="text-3xl font-source font-semibold text-grey-DA leading-6">
 							Latest Products
 						</h1>
-						<h3 className="font-signika -mt-1  font-medium">
+						<h3 className="font-signika leading-5">
 							Check out our newest products
 						</h3>
 					</div>
