@@ -11,6 +11,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import MenuItem from "./MenuItem";
+import MenuDisplay from "./MenuDisplay";
 import cross from "../../assets/cross2.svg";
 
 const ModalMenu = (props: {
@@ -18,8 +19,11 @@ const ModalMenu = (props: {
 }): React.ReactElement => {
 	return (
 		<div>
-			<div className=" fixed top-0 left-0 w-64 !h-screen !z-50 bg-grey-22 shadow-lg py-4 px-5 text-left">
-				<button onClick={() => props.showing(false)} className="float-right">
+			<div className="fixed top-0 left-0 z-50 flex flex-col w-64 h-max bg-grey-22 shadow-lg py-4 px-5 text-left">
+				<button
+					onClick={() => props.showing(false)}
+					className="float-right -mb-6 ml-1"
+				>
 					{""}
 					<Image
 						src={cross}
@@ -61,12 +65,7 @@ const ModalMenu = (props: {
 				</Link>
 				<br />
 				<hr className="h-1 border-1 mt-2" />
-				<MenuItem></MenuItem>
-				<p>My Account</p>
-				<p>All Product</p>
-				<ul>
-					<li>Categories</li>
-				</ul>
+				<MenuDisplay />
 			</div>
 		</div>
 	);
