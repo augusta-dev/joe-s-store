@@ -10,17 +10,24 @@
 //write now
 import Image from "next/image";
 import Link from "next/link";
+import MenuItem from "./MenuItem";
 import cross from "../../assets/cross2.svg";
 
-const ModalMenu = () => {
+const ModalMenu = (props: {
+	showing: (item: boolean) => void;
+}): React.ReactElement => {
 	return (
 		<div>
-			<div className=" fixed top-0 left-0 w-80 !h-screen !z-50 bg-grey-22 shadow-lg p-4 text-left">
-				<Image
-					src={cross}
-					alt=""
-                    className="float-right mt-1"
-				/>
+			<div className=" fixed top-0 left-0 w-64 !h-screen !z-50 bg-grey-22 shadow-lg py-4 px-5 text-left">
+				<button onClick={() => props.showing(false)} className="float-right">
+					{""}
+					<Image
+						src={cross}
+						alt=""
+						className="float-right mt-1"
+					/>
+				</button>
+
 				<p className="italic mb-4">
 					The links on this page have been placed abstractly as the
 					app is currently under development. These links have been
@@ -35,8 +42,16 @@ const ModalMenu = () => {
 				>
 					Admin Page
 				</Link>
-				<p className="italic">For uploading items (pieces of clothing along with their detail) to MongoDB</p>
-				<Link href="/signin" className="underline">Signin</Link>
+				<p className="italic">
+					For uploading items (pieces of clothing along with their
+					detail) to MongoDB
+				</p>
+				<Link
+					href="/signin"
+					className="underline"
+				>
+					Signin
+				</Link>
 				<p></p>
 				<Link
 					href="/signup"
@@ -46,6 +61,7 @@ const ModalMenu = () => {
 				</Link>
 				<br />
 				<hr className="h-1 border-1 mt-2" />
+				<MenuItem></MenuItem>
 				<p>My Account</p>
 				<p>All Product</p>
 				<ul>
