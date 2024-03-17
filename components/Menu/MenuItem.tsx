@@ -28,7 +28,7 @@ const MenuItem = (props: {
 						<div className="border-l-2 border-b-2 border-grey-87  rounded-b-lg w-10 h-5">
 							{" "}
 						</div>{" "}
-						<p className="-ml-5 bg-grey-22 px-3 hover:bg-grey-67 hover:rounded hover:text-grey-22 mt-2">
+						<p className="-ml-5 bg-grey-22 px-3 hover:bg-grey-67 hover:rounded hover:text-grey-22 mt-2 w-full">
 							{props.items[0]}
 						</p>
 					</li>
@@ -49,7 +49,7 @@ const MenuItem = (props: {
 						<div className="border-l-2 border-b-2 border-grey-87  rounded-b-lg w-10 h-5">
 							{" "}
 						</div>{" "}
-						<p className="-ml-5 bg-grey-22 px-3 hover:bg-grey-67 hover:rounded hover:text-grey-22 mt-2">
+						<p className="-ml-5 bg-grey-22 px-3 hover:bg-grey-67 hover:rounded hover:text-grey-22 mt-2 w-full">
 							Loading...
 						</p>
 					</li>
