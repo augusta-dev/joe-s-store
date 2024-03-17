@@ -32,14 +32,6 @@ const ModalMenu = (props: {
 					/>
 				</button>
 
-				<p className="italic mb-4">
-					The links on this page have been placed abstractly as the
-					app is currently under development. These links have been
-					incorporated for easy access to the relevant pages. It is
-					important to note that this is not the final design of the
-					menu and I am working towards enhancing it for a superior
-					user experience.
-				</p>
 				<Link
 					href="/admin"
 					className="underline"
