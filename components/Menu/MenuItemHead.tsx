@@ -1,10 +1,12 @@
 import React from "react";
 import Image from "next/image";
 import { useEffect } from "react";
+import Link from "next/link";
 
 export default function MenuItemHead(props: {
 	heading: string;
 	image: string;
+	link?: string;
 	setDisplay: (display: boolean) => void;
 }) {
 	const [value, setValue] = React.useState("+");
@@ -16,20 +18,22 @@ export default function MenuItemHead(props: {
 	}, [display]);
 
 	return (
-		<button
-			onClick={() => setDisplay(!display)}
-			className="flex flex-row justify-between text-grey-87 items-end align-baseline text-end w-full pt-2"
-		>
-			<div className="flex flex-row ">
-				<Image
-					src={props.image}
-					alt=""
-					className="w-6 mr-4"
-				/>
-				<h1 className="text-lg font-signika ">{props.heading}</h1>
-			</div>
+		<Link href={props.link || ""}>
+			<button
+				onClick={() => setDisplay(!display)}
+				className="flex flex-row justify-between text-grey-87 items-end align-baseline text-end w-full pt-2"
+			>
+				<div className="flex flex-row ">
+					<Image
+						src={props.image}
+						alt=""
+						className="w-6 h-6 mr-4"
+					/>
+					<h1 className="text-lg font-signika ">{props.heading}</h1>
+				</div>
 
-			<button className="text-2xl -mt-1">{value}</button>
-		</button>
+				<button className="text-2xl -mt-1">{value}</button>
+			</button>
+		</Link>
 	);
 }

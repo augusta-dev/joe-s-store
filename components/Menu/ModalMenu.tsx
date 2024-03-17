@@ -32,29 +32,11 @@ const ModalMenu = (props: {
 					/>
 				</button>
 
-				<Link
-					href="/admin"
-					className="underline"
-				>
-					Admin Page
-				</Link>
 				<p className="italic">
-					For uploading items (pieces of clothing along with their
-					detail) to MongoDB
+					The admin page is for uploading items (pieces of clothing along with their
+					details) to MongoDB. It was originally protected by NextAuth but has now been removed for viewing purposes.
 				</p>
-				<Link
-					href="/signin"
-					className="underline"
-				>
-					Signin
-				</Link>
-				<p></p>
-				<Link
-					href="/signup"
-					className="underline"
-				>
-					Signup
-				</Link>
+
 				<br />
 				<hr className="h-1 border-1 mt-2" />
 				<MenuDisplay />
