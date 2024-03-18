@@ -13,6 +13,7 @@ import Categories from "./Categories";
 import AccessDenied from "../UI/AccessDenied";
 import Link from "next/link";
 import Header from "../UI/Header";
+import Button from "../UI/Button";
 
 const AdminPage: React.FC = (props) => {
 	const UploadCtx = useContext(UploadContext);
@@ -148,35 +149,33 @@ const AdminPage: React.FC = (props) => {
 					setDetails({ ...details, bn: e.target.value });
 				}}
 			/>
-			<button
-				className="w-full h-12 mt-2 text-grey-67 bg-grey-22 text-left px-6 rounded-lg"
+			<Button
 				onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
 					e.preventDefault();
 					setShowCO(!showCO);
 				}}
 			>
 				Colour Options
-			</button>
+			</Button>
 			{showCO && <ColourOptions />}
-			<button
-				className="w-full h-12 mt-2 text-grey-67 bg-grey-22 text-left px-6 rounded-lg"
+			<Button
 				onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
 					e.preventDefault();
 					setShowSO(!showSO);
 				}}
 			>
 				Size Options
-			</button>
+			</Button>
 			{showSO && <SizeOptions />}
-			<button
-				className="w-full h-12 mt-2 text-grey-67 bg-grey-22 text-left px-6 rounded-lg"
+			<Button
+
 				onClick={(e) => {
 					e.preventDefault();
 					setShowCat(!showCat);
 				}}
 			>
 				Categories
-			</button>
+			</Button>
 
 			{showCat && (
 				<>
@@ -210,21 +209,20 @@ const AdminPage: React.FC = (props) => {
 				}}
 			/>
 
-			<button
+			<Button
 				onClick={(e) => {
 					submitHandler(e);
 				}}
-				type="submit"
 				className={`${
 					isFull ? "bg-grey-D9" : "bg-grey-67"
-				} h-12 w-full rounded-lg mt-16 text-grey-12 text-2xl font-medium`}
+				} rounded-lg mt-16 text-grey-12 text-2xl font-medium`}
 			>
 				Save
-			</button>
+			</Button>
 		</form>
 	);
 	// } else {
-	// 	return <AccessDenied />;
+	// 	return <AccessDenied data='You do not have access to this page!' />;
 	// }
 };
 export default AdminPage;

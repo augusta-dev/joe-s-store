@@ -11,14 +11,23 @@ import "../../components/Admin/colour-options.css";
 export default function Signin() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const { data: session } = useSession();
+	const [isFull, setIsFull] = useState<boolean>(false);
+
+	useEffect(() => {
+		email.length > 0 && password.length > 0
+			? setIsFull(true)
+			: setIsFull(false);
+	});
+	
 	const [error, setError] = useState<{
 		color: string;
 		message: string;
 		image: string;
 		title: string;
 	}>();
+	
 	const router = useRouter();
+	const { data: session } = useSession();
 
 	const submitHandler = async (e: React.FormEvent<HTMLButtonElement>) => {
 		e.preventDefault();
@@ -28,7 +37,6 @@ export default function Signin() {
 				password,
 				redirect: false,
 			});
-			console.log("something", res, email, password);
 			if (res && res.error) {
 				setError({
 					color: "bg-red-6",
@@ -54,9 +62,6 @@ export default function Signin() {
 			console.log(err);
 		}
 	};
-	useEffect(() => {
-		console.log(session);
-	}, [session]);
 
 	return (
 		<form className="flex flex-col h-full py-7 align-middle items-center">
@@ -76,15 +81,11 @@ export default function Signin() {
 				id="input"
 				type="email"
 				onChange={(e) => setEmail(e.target.value)}
-				// onMouseOver={(e) => setEmail(e.target.value)}
-				// onMouseOut={(e) => setEmail(e.target.value)}
 			/>
 			<Input
 				id="input"
 				type="password"
 				onChange={(e) => setPassword(e.target.value)}
-				// onMouseOut={(e) => setPassword(e.target.value)}
-				// onMouseOver={(e) => setPassword(e.target.value)}
 			/>
 			{error && (
 				<div
@@ -100,7 +101,9 @@ export default function Signin() {
 				onClick={(e) => {
 					submitHandler(e);
 				}}
-				className="bg-grey-67 w-full h-12 mt-10 rounded-lg focus:bg-grey-C3"
+				className={`${
+					isFull ? "!bg-grey-D9" : "!bg-grey-67"
+				} bg-grey-67 w-full h-12 mt-10 rounded-lg focus:bg-grey-C3`}
 			>
 				Submit
 			</button>

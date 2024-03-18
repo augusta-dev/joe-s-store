@@ -3,7 +3,7 @@ export type InputProps = {
 	type?: string;
 	placeholder?: string;
 	id?: string;
-	value?: string | number;
+	value?: string | number ;
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onMouseOver?: (e: React.MouseEvent<HTMLInputElement>) => void;
 	onMouseOut?: (e: React.MouseEvent<HTMLInputElement>) => void;

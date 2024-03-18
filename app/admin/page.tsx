@@ -1,10 +1,10 @@
-import AdminPage from "../../components/Admin/Admin";
+import AdminSignin from "../../components/Admin/AdminSignin";
 import UploadProvider from "../../components/Providers/UploadProvider";
 
 const Admin = () => {
 	return (
 		<UploadProvider>
-			<AdminPage></AdminPage>
+			<AdminSignin></AdminSignin>
 		</UploadProvider>
 	);
 };
