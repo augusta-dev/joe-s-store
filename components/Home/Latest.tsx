@@ -6,22 +6,23 @@ import { imagesDef } from "../Providers/SubmissionTypes";
 import Image from "next/image";
 import Sale from "./Sale";
 import ListContext from "../Providers/ListContext";
+import Filters from "../UI/Filters";
 
 export default function Latest() {
 	const [url, setUrl] = useState("");
-    const listCtx = useContext(ListContext)
+	const listCtx = useContext(ListContext);
 
 	const getImages = async () => {
 		const list = await fetch("/api/get-images");
 		const data = await list.json();
-        listCtx.setList(data);
+		listCtx.setList(data);
 		let array: imagesDef = data[data.length - 1].images;
 		setUrl(array[array.length - 1].url);
 	};
 
-	useEffect(()=>{
-		getImages()
-	}, [])
+	useEffect(() => {
+		getImages();
+	}, []);
 	return (
 		<>
 			<div className="w-full bg-grey-22 rounded-lg h-fit flex flex-row px-3 my-4 py-3 !z-20">
