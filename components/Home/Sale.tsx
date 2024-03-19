@@ -1,7 +1,7 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
 import ListContext from "../Providers/ListContext";
-import ProductDisplay from "../Products/ProductDisplay";
+import ProductDisplay from "../UI/ProductDisplay";
 import { imagesDef } from "../Providers/SubmissionTypes";
 import { list } from "../Providers/ListContext";
 export default function Sale() {

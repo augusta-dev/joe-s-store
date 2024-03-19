@@ -4,12 +4,17 @@ import Image from "next/image";
 import tick from "../../assets/tick.svg";
 import { useState } from "react";
 import UploadContext from "../Providers/UploadContext";
-const ColourInput: React.FC<{ className: string; value: string }> = (props) => {
+const ColourInput: React.FC<{ className: string; value: string; upload?:boolean }> = (props) => {
 	const uploadCtx = useContext(UploadContext);
 
 	const [isClicked, setIsClicked] = useState(false);
 	useEffect(() => {
-		uploadCtx.setColourOption([props.value, isClicked]);
+		if (props.upload) {
+			uploadCtx.setColourOption([props.value, isClicked]);
+		}
+		if (props.filter){
+			filterCtx.setColourOption([props.value, isClicked]);
+		}
 	}, [isClicked]);
 
 	return (

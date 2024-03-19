@@ -7,9 +7,9 @@ import { list } from "@/components/Providers/ListContext";
 export default function Home() {
 	return (
 		<>
-			<Filters></Filters>
-			<MenuBar></MenuBar>
-			<Latest></Latest>
+			<Filters />
+			<MenuBar />
+			<Latest />
 		</>
 	);
 }

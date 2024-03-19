@@ -48,7 +48,7 @@ export default function Latest() {
 					/>
 				</section>
 			</div>
-			<Sale></Sale>
+			<Sale />
 		</>
 	);
 }

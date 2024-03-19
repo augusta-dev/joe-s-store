@@ -1,8 +1,11 @@
 import React from "react";
 import "./colour-options.css";
 import ColourInput from "./ColourInput";
+type Props={
+	className?: string
+}
 
-export default function ColourOptions() {
+export default function ColourOptions({className}:Props) {
 	const colours = [
 		{ value: "black", className: "bg-black" },
 		{ value: "white", className: "bg-white" },
@@ -24,12 +27,13 @@ export default function ColourOptions() {
 		{ value: "pink", className: "bg-pink-600" },
 	];
 	return (
-		<div className="flex flex-wrap flex-row w-full gap-2 mt-2 justify-start items-start">
+		<div className={`flex flex-wrap flex-row w-full gap-2 mt-2 justify-start items-start ${className}`}>
 			{colours.map(({ value, className }, index) => (
 				<ColourInput
 					key={index}
 					value={value}
 					className={className}
+					upload={true}
 				/>
 			))}
 		</div>

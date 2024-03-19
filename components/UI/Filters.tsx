@@ -32,7 +32,7 @@ const Filters = () => {
 	return (
 		<>
 			{isOpen && (
-				<div className="h-screen fixed z-50 flex justify-center align-middle items-center w-full backdrop-opacity-10 backdrop-invert bg-grey-12/60 left-0">
+				<div className="h-screen fixed z-50 flex flex-col justify-center align-middle items-center  backdrop-opacity-10 backdrop-invert text-center bg-grey-12/60 w-full left-0">
 					<Filter onClose={closeDialog}></Filter>
 				</div>
 			)}
